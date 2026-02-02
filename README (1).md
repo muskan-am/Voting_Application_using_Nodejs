@@ -1,66 +1,156 @@
-# Voting Application
+# 🗳️ Voting Application using Node.js
 
-This is a backend application for a voting system where users can vote for candidates. It provides functionalities for user authentication, candidate management, and voting.
+A backend-based **Voting Application** built using **Node.js, Express.js, and MongoDB**.  
+This project implements **secure user authentication**, **role-based access (Admin/User)**, and a **one-time voting system**.
 
-## Features
+---
 
-- User sign up and login with Aadhar Card Number and password
-- User can view the list of candidates
-- User can vote for a candidate (only once)
-- Admin can manage candidates (add, update, delete)
+## 🚀 Features
+
+### 👤 User
+- Sign up and login using **Aadhar Card Number**
+- View list of candidates
+- Vote for a candidate (**only once**)
+- View user profile
+- Change password
+
+### 🛠️ Admin
+- Add new candidates
+- Update candidate details
+- Delete candidates
+- View vote count of all candidates
+- ❌ Admin is **not allowed to vote**
+
+---
+
+## 🧰 Tech Stack
+
+- **Node.js**
+- **Express.js**
+- **MongoDB**
+- **Mongoose**
+- **JWT (JSON Web Token)**
+
+---
+
+## 📁 Project Structure
+
+```
+Voting_Application_using_Nodejs/
+│
+├── models/          # Mongoose schemas
+├── routers/         # API routes
+├── db.js            # MongoDB connection
+├── jwt.js           # JWT utilities & middleware
+├── server.js        # Application entry point
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/muskan-am/Voting_Application_using_Nodejs.git
+```
+
+### 2️⃣ Go to project directory
+```bash
+cd Voting_Application_using_Nodejs
+```
+
+### 3️⃣ Install dependencies
+```bash
+npm install
+```
+
+### 4️⃣ Create `.env` file
+```env
+PORT=3000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+### 5️⃣ Start the server
+```bash
+node server.js
+```
+
+Server will run on:
+```
+http://localhost:3000
+```
+
+---
+
+## 🔐 API Endpoints
+
+### 🔑 Authentication
+
+| Method | Endpoint | Description |
+|------|---------|-------------|
+| POST | `/user/signup` | Register a new user |
+| POST | `/user/login` | Login user & get JWT |
+
+---
+
+### 👥 Candidates
+
+| Method | Endpoint | Access |
+|------|---------|--------|
+| GET | `/candidates` | User |
+| POST | `/candidates` | Admin |
+| PUT | `/candidates/:id` | Admin |
+| DELETE | `/candidates/:id` | Admin |
+
+---
+
+### 🗳️ Voting
+
+| Method | Endpoint | Access |
+|------|---------|--------|
+| POST | `/candidates/vote/:id` | User |
+| GET | `/candidates/vote/count` | Admin |
+
+---
+
+### 👤 User Profile
+
+| Method | Endpoint |
+|------|---------|
+| GET | `/user/profile` |
+| PUT | `/user/profile/password` |
+
+---
+
+## 🔒 Security Rules
+
+- JWT-based authentication
+- Role-based authorization (Admin/User)
+- One user can vote only once
 - Admin cannot vote
+- Sensitive data handled using environment variables
 
-## Technologies Used
+---
 
-- Node.js
-- Express.js
-- MongoDB
-- JSON Web Tokens (JWT) for authentication
+## 📌 Future Enhancements
 
-## Installation
+- Swagger API documentation
+- Pagination for candidates
+- Frontend integration
+- Election result declaration
 
-1. Clone the repository:
+---
 
-   ```bash
-   git clone https://github.com/Prince-1501/voting_app.git
+## 👩‍💻 Author
 
+**Muskan Kesharwani**  
+Backend Developer | Node.js | MongoDB  
 
-# API Endpoints
+---
 
-## Authentication
+⭐ If you like this project, don’t forget to star the repository!
 
-### Sign Up
-- `POST /signup`: Sign up a user
-
-### Login
-- `POST /login`: Login a user
-
-## Candidates
-
-### Get Candidates
-- `GET /candidates`: Get the list of candidates
-
-### Add Candidate
-- `POST /candidates`: Add a new candidate (Admin only)
-
-### Update Candidate
-- `PUT /candidates/:id`: Update a candidate by ID (Admin only)
-
-### Delete Candidate
-- `DELETE /candidates/:id`: Delete a candidate by ID (Admin only)
-
-## Voting
-
-### Get Vote Count
-- `GET /candidates/vote/count`: Get the count of votes for each candidate
-
-### Vote for Candidate
-- `POST /candidates/vote/:id`: Vote for a candidate (User only)
-
-## User Profile
-
-### Get Profile
-- `GET /users/profile`: Get user profile information
-
-### Change Password
-- `PUT /users/profile/password`: Change user password
