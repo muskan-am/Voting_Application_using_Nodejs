@@ -1,25 +1,15 @@
 {
     "name": "Narendra Modi",
     "party": "BJP",
-    "age"  : 71,
-    "votes" : [
+    "age": 71,
+    "votes": [
         {
-            "user" : "600f715751xbhxh54552455",
-            "votedAt": "2026-02-01T08:00:00.000Z"
+            "user": "2236326aa2s5w2de6f2edfc",
+            "votedAt": "2026-01-20T08:00:000Z"
         },
         {
-            "user" : "600f715751xbhxh54552455",
-            "votedAt": "2026-02-01T08:00:00.000Z"
-        },
-        {
-            "user" : "600f715751xbhxh54552455",
-            "votedAt": "2026-02-01T08:00:00.000Z"
-        },
-        {
-            "user" : "600f715751xbhxh54552455",
-            "votedAt": "2026-02-01T08:00:00.000Z"
+            "user": "2236326aa2s5w2de6f2edfc",
+            "votedAt": "2026-01-20T08:00:000Z"
         }
-
-    ],
-    "voteCount": 2
+    ]
 }
