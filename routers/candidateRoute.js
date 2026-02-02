@@ -21,11 +21,9 @@ const checkAdminRole = async (userID) => {
 router.post('/',jwtAuthMiddleware, async (req,res) => {
     try{
 
-        if(! await checkAdminRole(req.user.id)){
-            console.log("admin role not found");
+        if(! (await checkAdminRole(req.user.id))){
+           // console.log("admin role not found");
             return res.status(403).json({message : 'user does not have admin role'});
-        }else{
-            console.log("admin role found");
         }
 
         const data = req.body; //Assuming the request body contains the candidate data
@@ -51,11 +49,9 @@ router.put('/:candidateID',jwtAuthMiddleware, async (req, res) => {
         if(!checkAdminRole(req.user.id))
             return res.status(403).json({message: 'user does  not have admin role'});
 
-        //Extract the id from the URL parameter
-        const candidateID = req.params.candidateID;
+        const candidateID = req.params.candidateID;  //Extract the id from the URL parameter
 
-        //Update data for the person
-        const updatedCandidateData = req.body;
+        const updatedCandidateData = req.body; //Update data for the person
 
         const response = await Candidate.findByIdAndUpdate(candidateID, updatedCandidateData, {
             new : true, //Return the updated document

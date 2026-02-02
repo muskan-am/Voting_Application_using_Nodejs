@@ -10,6 +10,12 @@ router.post('/signup', async (req , res) => {
         //Assuming the request body contains the user data
         const data = req.body;
 
+        //check if there is already an admin user
+        const adminUser = await User.findOne({role: 'admin'});
+        if(data.role === 'admin' && adminUser){
+            return res.status(400).json({error : 'Admin user already exist'});
+        }
+
         //create a new user document using the mongoose model
         const newUser = new User(data);
 
