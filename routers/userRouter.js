@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('./../models/user');
 const {jwtAuthMiddleware, generateToken} = require('./../jwt');
-//const { JsonWebTokenError } = require('jsonwebtoken');
+
 
 //POST route to add a user
 router.post('/signup', async (req , res) => {
@@ -91,7 +91,6 @@ router.put('/profile/password', jwtAuthMiddleware, async (req, res) => {
         if(!(await user.comparePassword(currentPassword))){
             return res.status(401).json({error : 'Invalid username or password'});
         }
-
         //update the user's password
         user.password = newPassword;
         await user.save();

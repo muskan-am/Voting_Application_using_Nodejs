@@ -8,9 +8,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json()); //req.body
 const PORT = process.env.PORT || 3000;
 
+
 //Import the router files
 const userRoutes = require('./routers/userRouter');
+const candidateRoutes = require('./routers/candidateRoute');
+
+//Use the routers
 app.use('/user', userRoutes);
+app.use('/candidate', candidateRoutes);
 
 app.listen(PORT , ()=>{
     console.log(`Server running on port ${PORT}`);
