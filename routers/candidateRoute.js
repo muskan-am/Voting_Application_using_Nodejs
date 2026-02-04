@@ -132,7 +132,7 @@ router.post('/vote/:candidateID', jwtAuthMiddleware, async (req,res)=> {
         if(!user){
             return res.status(404).json({message : 'user not found'});
         }
-
+        
         if(user.isVoted){
             res.status(400).json({message : 'You have already voted'});
         }
@@ -171,8 +171,7 @@ router.get('/vote/count', async (req,res)=> {
                 party: data.party,
                 count: data.voteCount
             }
-        })
-        
+        })       
         return res.status(200).json({voteRecord});
     }catch(err){
         console.log(err);
