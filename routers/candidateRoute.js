@@ -93,6 +93,26 @@ router.delete('./:candidateID',jwtAuthMiddleware, async (req,res)=> {
 })
 
 
+//List of candidate's
+router.get('/candidates', async (req,res)=> {
+    try{
+        const candidates = await Candidate.find();
+
+       const list = candidates.map((data)=> {
+            return{
+                name: data.name,
+                party: data.party
+            }
+       })
+        res.status(200).json(list);
+
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error : 'Internal server error'});
+    }
+})
+
 //let's start voting
 router.post('/vote/:candidateID', jwtAuthMiddleware, async (req,res)=> {
     //no admin can vote
@@ -138,5 +158,26 @@ router.post('/vote/:candidateID', jwtAuthMiddleware, async (req,res)=> {
     }
 })
 
+
+//vote count
+router.get('/vote/count', async (req,res)=> {
+    try{
+        //Find all candidated and sort them by voteCount in descending order
+        const candidate = await Candidate.find().sort({voteCount: 'desc'});
+
+        //Map the candidates to only return their name and voteCount
+        const voteRecord = candidate.map((data)=>{
+            return{
+                party: data.party,
+                count: data.voteCount
+            }
+        })
+        
+        return res.status(200).json({voteRecord});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error : 'Internal server error'});
+    }
+})
 module.exports = router;
 

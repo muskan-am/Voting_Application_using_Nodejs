@@ -46,7 +46,7 @@ userSchema.pre('save', async function(next){
     const user = this;
 
     //Hash the password only if it has been modified (or is new)
-    if(!user.isModified('password')) return next();
+    if(!user.isModified('password')) return next;
 
     try{
         //hash password generation
