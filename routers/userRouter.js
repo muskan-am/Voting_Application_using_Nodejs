@@ -16,6 +16,17 @@ router.post('/signup', async (req , res) => {
             return res.status(400).json({error : 'Admin user already exist'});
         }
 
+        //Validate Adhar Card Number must have exactly 12 digit
+        if(!/^\d{12}$/.test(data.aadharCardNumber)){
+            return res.status(400).json({error : 'Adhar Card Number be exactly 12 digit'});
+        }
+
+        //Check if a user with the same adhar card number already exists
+        const existingUser = await User.findOne({ aadharCardNumber: data.aadharCardNumber});
+        if(existingUser){
+            return res.status(400).json({error: 'User with the same aadhar card number already exist'});
+        }
+
         //create a new user document using the mongoose model
         const newUser = new User(data);
 
@@ -45,6 +56,10 @@ router.post('/login', async (req, res) => {
         //Extract aadharCardNumber and password from request body;
         const {aadharCardNumber, password} = req.body;
 
+        //Check if aadharCardNumber or password is missing
+        if(!aadharCardNumber || !password){
+            return res.status(400).json({error : 'Adhar Card number and password are required'});
+        }
         //find the user by aadharCardNumber
         const user = await User.findOne({aadharCardNumber: aadharCardNumber});
 
